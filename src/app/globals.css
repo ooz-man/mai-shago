@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/*
+  Tailwind v4 theme tokens. These map to the ThemeTokens shape in
+  src/types/hotel.ts. The default values below match the "navy-gold"
+  preset — ThemeProvider (see layout.tsx) overrides them per-hotel by
+  setting the same CSS variables inline, so no rebuild is required to
+  reskin a deployment.
+*/
+@theme {
+  --font-heading: var(--font-playfair), serif;
+  --font-body: var(--font-manrope), sans-serif;
+
+  --color-primary: #0b1e33;
+  --color-secondary: #c9a227;
+  --color-accent: #e9d9ae;
+  --color-neutral-light: #faf7f2;
+  --color-neutral-soft: #d9d5cc;
+  --color-surface: #ffffff;
+  --color-foreground: #14202e;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-neutral-light);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+  }
+
+  /* Respect reduced-motion users even though Lenis/Framer are used elsewhere */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
